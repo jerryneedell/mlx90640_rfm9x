@@ -42,7 +42,7 @@ while True:
         #print("packet received",packet_count)
         for h in range(4):
             for w in range(32):
-                t = packet[4 + h * 32 + w]
+                t = packet[5 + h * 32 + w]
                 c = "&"
                 # pylint: disable=multiple-statements
                 if t < 20:
