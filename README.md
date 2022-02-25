@@ -8,5 +8,5 @@ Transmit mlx90604 image via rfm9x to receiver for display
 * mlx90640_simpletest.py  -- basic demo code for mlx90640 on Raspberry Pi Pico
 * mlx_tft24.py  -- demo code for 2.4 inch TFT on a feather rp2040 with mlx90640
 
-The transmit program breaks each mlx90640 image into 6 packets of 128 bytes and prepends a byte indication the index of the packet into the image. THe index byte will be from 0 to 5. When a packet with index 5 has arrive, then the image is complete.
+The transmit program breaks each mlx90640 image into 6 packets of 128 bytes and prepends a byte indicating the index of the packet into the image. THe index byte will be from 0 to 5. When a packet with index 5 has arrive, then the image is complete.
 
