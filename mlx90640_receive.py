@@ -40,30 +40,34 @@ while True:
         # send reading after any packet received
         packet_count += 1
         #print("packet received",packet_count)
-        for h in range(4):
-            for w in range(32):
-                t = packet[5 + h * 32 + w]
-                c = "&"
-                # pylint: disable=multiple-statements
-                if t < 20:
-                    c = " "
-                elif t < 23:
-                    c = "."
-                elif t < 25:
-                    c = "-"
-                elif t < 27:
-                    c = "*"
-                elif t < 29:
-                    c = "+"
-                elif t < 31:
-                    c = "x"
-                elif t < 33:
-                    c = "%"
-                elif t < 35:
-                    c = "#"
-                elif t < 37:
-                    c = "X"
-                # pylint: enable=multiple-statements
-                print(c, end="")
-            print()
+        if packet[4] < 6:  # it's an mlx packet
+            for h in range(4):
+                for w in range(32):
+                    t = packet[5 + h * 32 + w]
+                    c = "&"
+                    # pylint: disable=multiple-statements
+                    if t < 20:
+                        c = " "
+                    elif t < 23:
+                        c = "."
+                    elif t < 25:
+                        c = "-"
+                    elif t < 27:
+                        c = "*"
+                    elif t < 29:
+                        c = "+"
+                    elif t < 31:
+                        c = "x"
+                    elif t < 33:
+                        c = "%"
+                    elif t < 35:
+                        c = "#"
+                    elif t < 37:
+                        c = "X"
+                    # pylint: enable=multiple-statements
+                    print(c, end="")
+                print()
+
+        elif packet[4] == 6: #it's a bme680 packet
+            print(packet[5:])
 

@@ -149,33 +149,34 @@ while True:
         # send reading after any packet received
         packet_count += 1
         #print("packet received",packet_count)
-        for h in range(4):
-            for w in range(32):
-                t = packet[5 + h * 32 + w] #skip header and packet count
-                frame[128*(packet[4]) + 32*h + w] = t
-                c = "&"
-                # pylint: disable=multiple-statements
-                if t < 20:
-                    c = " "
-                elif t < 23:
-                    c = "."
-                elif t < 25:
-                    c = "-"
-                elif t < 27:
-                    c = "*"
-                elif t < 29:
-                    c = "+"
-                elif t < 31:
-                    c = "x"
-                elif t < 33:
-                    c = "%"
-                elif t < 35:
-                    c = "#"
-                elif t < 37:
-                    c = "X"
-                # pylint: enable=multiple-statements
-                print(c, end="")
-            print()
+        if packet[4] < 6:
+            for h in range(4):
+                for w in range(32):
+                    t = packet[5 + h * 32 + w] #skip header and packet count
+                    frame[128*(packet[4]) + 32*h + w] = t
+                    c = "&"
+                    # pylint: disable=multiple-statements
+                    if t < 20:
+                        c = " "
+                    elif t < 23:
+                        c = "."
+                    elif t < 25:
+                        c = "-"
+                    elif t < 27:
+                        c = "*"
+                    elif t < 29:
+                        c = "+"
+                    elif t < 31:
+                        c = "x"
+                    elif t < 33:
+                        c = "%"
+                    elif t < 35:
+                        c = "#"
+                    elif t < 37:
+                        c = "X"
+                    # pylint: enable=multiple-statements
+                    print(c, end="")
+                print()
         if(packet[4] == 5):
             mini = frame[0]  # Define a min temperature of current image
             maxi = frame[0]  # Define a max temperature of current image
@@ -197,3 +198,5 @@ while True:
 
             min_t = mini  # Automatically change the color scale
             max_t = maxi
+        if packet[4] > 5:
+            print(packet)
